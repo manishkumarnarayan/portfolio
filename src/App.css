@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+
+.section {
+  @apply 
+  relative 
+  top-22 
+  w-[98%] 
+  h-[100vh] 
+  bg-[var(--surface-2)]/20
+  backdrop-blur-[20px] 
+  flex 
+  flex-col 
+  justify-start 
+  items-center 
+  pt-20 
+  rounded-3xl 
+  border-[1px] 
+  border-white;
+}
