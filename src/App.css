@@ -5,9 +5,9 @@
   relative 
   top-22 
   w-[98%] 
-  h-[100vh] 
-  bg-[var(--surface-2)]/20
-  backdrop-blur-[20px] 
+  h-[calc(100vh-6rem)] 
+  bg-[var(--surface)]/50
+  /* backdrop-blur-[20px]  */
   flex 
   flex-col 
   justify-start 
@@ -16,4 +16,14 @@
   rounded-3xl 
   border-[1px] 
   border-white;
+}
+
+.header{
+  font-family: var(--header-font);
+  font-optical-sizing: auto;
+  font-size: 1.5rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  button{
+    font-size: 0.5rem;
+  }
 }

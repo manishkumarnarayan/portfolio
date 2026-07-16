@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import FadeIn from './assets/animations/animations.jsx'
-import { useInView } from 'motion/react';
+// import { useInView } from 'motion/react';
 
-function Header() {
+function Header({
+  introref,
+  aboutref,
+  skillsref,
+  projectsref,
+  contactref
+}) {
   const [scrollY, setScrollY] = useState(false);
   useEffect(()=>{
     const handleScroll = () => {
@@ -12,45 +18,54 @@ function Header() {
     window.addEventListener('scroll', handleScroll);
     return ()=> window.removeEventListener('scroll', handleScroll)
   },[])
-
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+  }
   return(
-    <div>
-      <h1 className=
+    <div className=
       {
-        `fixed
+        `header
+        fixed
         left-1/2
         -translate-x-1/2
         transition-all
         duration-300
         h-20 
         bg-[var(--surface-2)]/60
-        backdrop-blur-[50px] 
-        flex 
+        backdrop-blur-[45px] 
+        grid
         justify-center 
         items-center 
         text-[var(--text)]
-        z-50
+        z-45
         ${scrollY ? 
           'top-4 w-[96%] rounded-2xl shadow-[0_0_20px_var(--border)]' 
           : 'top-0 w-full rounded-none'
         }`
-      }>Header</h1>
+      }>
+      <h1 className='justify-self-start p-4 col-[1/3]'>Manish Kumar Narayan</h1>
+      <div className="section-btn flex flex-row gap-10 col-[4/7]">
+        <button onClick={()=>scrollToSection(introref)} >Introduction</button>
+        <button onClick={()=>scrollToSection(aboutref)} >About-Me</button>
+        <button onClick={()=>scrollToSection(skillsref)} >Skills</button>
+        <button onClick={()=>scrollToSection(projectsref)} >Projects</button>
+        <button onClick={()=>scrollToSection(contactref)} >Contact</button>
+      </div>
     </div>
   )
 }
 
 
-function Introduction(){
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.1 });
-  useEffect(()=>{
-    if(inView){
-      ref.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    }
-  },[inView])
+function Introduction({introref}){
+  // const inView = useInView(ref, { amount: 0.2 });
+  // useEffect(()=>{
+  //   if(inView){
+  //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+  //   }
+  // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-20' ref={ref}>
+      <div className=' section scroll-mt-60' ref={introref}>
         <h1 className='text-2xl font-bold'>Introduction</h1>
       </div>
     </FadeIn>
@@ -58,17 +73,16 @@ function Introduction(){
 }
 
 
-function AboutMe(){
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.1 });
-  useEffect(()=>{
-    if(inView){
-      ref.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    }
-  },[inView])
+function AboutMe({aboutref}){
+  // const inView = useInView(ref, { amount: 0.2 });
+  // useEffect(()=>{
+  //   if(inView){
+  //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+  //   }
+  // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-20' ref={ref}>
+      <div className='section scroll-mt-60' ref={aboutref}>
         <h1 className='text-2xl font-bold'>About Me</h1>
       </div>
     </FadeIn>
@@ -76,17 +90,16 @@ function AboutMe(){
 }
 
 
-function Skills(){
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.1 });
-  useEffect(()=>{
-    if(inView){
-      ref.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    }
-  },[inView])
+function Skills({skillsref}){
+  // const inView = useInView(ref, { amount: 0.2 });
+  // useEffect(()=>{
+  //   if(inView){
+  //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+  //   }
+  // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-20' ref={ref}>
+      <div className='section scroll-mt-60' ref={skillsref}>
         <h1 className='text-2xl font-bold'>Skills</h1>
       </div>
     </FadeIn>
@@ -94,17 +107,16 @@ function Skills(){
 }
 
 
-function Projects(){
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.1 });
-  useEffect(()=>{
-    if(inView){
-      ref.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    }
-  },[inView])
+function Projects({projectsref}){
+  // const inView = useInView(ref, { amount: 0.2 });
+  // useEffect(()=>{
+  //   if(inView){
+  //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+  //   }
+  // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-20' ref={ref}>
+      <div className='section scroll-mt-60' ref={projectsref}>
         <h1 className='text-2xl font-bold'>Projects</h1>
       </div>
     </FadeIn>
@@ -112,17 +124,16 @@ function Projects(){
 }
 
 
-function Contact(){
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.1 });
-  useEffect(()=>{
-    if(inView){
-      ref.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
-    }
-  },[inView])
+function Contact({contactref}){
+  // const inView = useInView(ref, { amount: 0.2 });
+  // useEffect(()=>{
+  //   if(inView){
+  //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+  //   }
+  // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-20' ref={ref}>
+      <div className='section scroll-mt-60' ref={contactref}>
         <h1 className='text-2xl font-bold'>Contact</h1>
       </div>
     </FadeIn>
@@ -131,14 +142,25 @@ function Contact(){
 
 
 function Body() {
+  const introref = useRef(null);
+  const aboutref = useRef(null);
+  const skillsref = useRef(null);
+  const projectsref = useRef(null);
+  const contactref = useRef(null);
   return (
     <div className='flex flex-col gap-2 items-center justify-center'>
-      <Header />
-      <Introduction />
-      <AboutMe />
-      <Skills />
-      <Projects />
-      <Contact />
+      <Header
+        introref={introref}
+        aboutref={aboutref}
+        skillsref={skillsref}
+        projectsref={projectsref}
+        contactref={contactref}
+      />
+      <Introduction introref={introref} />
+      <AboutMe aboutref={aboutref} />
+      <Skills skillsref={skillsref}/>
+      <Projects projectsref={projectsref}/>
+      <Contact contactref={contactref}/>
     </div>
   )
 }

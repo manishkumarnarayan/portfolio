@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   --bg: #020617;
   --surface: #0F172A;
@@ -12,6 +12,9 @@
   --text: #F8FAFC;
   --muted: #94A3B8;
   --border: #334155;
+
+  --header-font: 'Montserrat', sans-serif;
+  --content-font: 'Raleway', sans-serif;
 
   --success: #22C55E;
   --warning: #F59E0B;
