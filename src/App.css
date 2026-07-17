@@ -6,7 +6,7 @@
   top-22 
   w-[98%] 
   h-[calc(100vh-6rem)] 
-  bg-[var(--surface)]/50
+  bg-[var(--surface)]/60
   /* backdrop-blur-[20px]  */
   flex 
   flex-col 
@@ -18,12 +18,27 @@
   border-white;
 }
 
+
 .header{
-  font-family: var(--header-font);
+  font-family: var(--font-raleway);
   font-optical-sizing: auto;
-  font-size: 1.5rem;
+  font-size: 2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   button{
+    font-family: var(--font-montserrat);
     font-size: 0.5rem;
   }
+  button:hover{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 2px;
+    cursor: pointer;
+  }
+}
+
+.txt-content{
+  font-size: 10rem;
+  text-shadow: 0 0 20px var(--border);
+  justify-self: center;
+  color: var(--text);
 }

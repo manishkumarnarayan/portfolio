@@ -29,7 +29,7 @@ function Header({
         left-1/2
         -translate-x-1/2
         transition-all
-        duration-300
+        duration-400
         h-20 
         bg-[var(--surface-2)]/60
         backdrop-blur-[45px] 
@@ -43,10 +43,10 @@ function Header({
           : 'top-0 w-full rounded-none'
         }`
       }>
-      <h1 className='justify-self-start p-4 col-[1/3]'>Manish Kumar Narayan</h1>
-      <div className="section-btn flex flex-row gap-10 col-[4/7]">
+      <h1 className='name justify-self-start p-4 col-[1/3]'>Manish Kumar Narayan</h1>
+      <div className="section-btn flex flex-row justify-between pr-12 gap-5 col-[5/7]">
         <button onClick={()=>scrollToSection(introref)} >Introduction</button>
-        <button onClick={()=>scrollToSection(aboutref)} >About-Me</button>
+        <button className='whitespace-nowrap' onClick={()=>scrollToSection(aboutref)} >About Me</button>
         <button onClick={()=>scrollToSection(skillsref)} >Skills</button>
         <button onClick={()=>scrollToSection(projectsref)} >Projects</button>
         <button onClick={()=>scrollToSection(contactref)} >Contact</button>
@@ -66,7 +66,9 @@ function Introduction({introref}){
   return (
     <FadeIn>
       <div className=' section scroll-mt-60' ref={introref}>
-        <h1 className='text-2xl font-bold'>Introduction</h1>
+        <h1 className='txt-content text-2xl font-raleway font-light tracking-[1px]'>Simple.<br></br></h1>
+        <h1 className='txt-content text-2xl font-monsieur font-light tracking-[1px]'>Elegant.<br></br></h1>
+        <h1 className='txt-content text-2xl font-raleway font-light tracking-[1px]'>Functional.</h1>
       </div>
     </FadeIn>
   )

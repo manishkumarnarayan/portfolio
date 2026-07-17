@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Lavishly+Yours&family=Monsieur+La+Doulaise&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+ID:wght@100..400&family=Raleway:ital,wght@0,100..900;1,100..900&family=Yuyu&display=swap');
 @import 'tailwindcss';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   --bg: #020617;
   --surface: #0F172A;
@@ -13,12 +13,29 @@
   --muted: #94A3B8;
   --border: #334155;
 
-  --header-font: 'Montserrat', sans-serif;
-  --content-font: 'Raleway', sans-serif;
-
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-raleway: 'Raleway', sans-serif;
+  --font-playwrite: 'Playwrite ID', cursive;
+  --font-yuyu: 'Yuyu', sans-serif;
+  --font-caveat: 'Caveat', cursive;
+  --font-dancing-script: 'Dancing Script', cursive;
+  --font-lavishly: 'Lavishly Yours', cursive;
+  --font-monsieur: 'Monsieur La Doulaise', cursive;
+  
   --success: #22C55E;
   --warning: #F59E0B;
   --danger: #EF4444;
+}
+
+@theme {
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-raleway: 'Raleway', sans-serif;
+  --font-playwrite: 'Playwrite ID', cursive;
+  --font-yuyu: 'Yuyu', sans-serif;
+  --font-caveat: 'Caveat', cursive;
+  --font-dancing-script: 'Dancing Script', cursive;
+  --font-lavishly: 'Lavishly Yours', cursive;
+  --font-monsieur: 'Monsieur La Doulaise', cursive;
 }
 
 body{
