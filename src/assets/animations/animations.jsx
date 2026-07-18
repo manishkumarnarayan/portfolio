@@ -6,7 +6,7 @@ export default function FadeIn({ children }) {
     const fadeUp = {
         hidden: {
             opacity: 0,
-            y: 20
+            y: 10
         },
         visible: {
             opacity: 1,
