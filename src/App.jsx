@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import FadeIn from './assets/animations/animations.jsx'
-// import myphoto from 'src/assets/images/MySelf.jpg'
-// import { useInView } from 'motion/react';
 
 function Header({
   introref,
@@ -20,7 +18,7 @@ function Header({
     return ()=> window.removeEventListener('scroll', handleScroll)
   },[])
   const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+    ref.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
   return(
     <>
@@ -33,7 +31,7 @@ function Header({
           transition-all
           duration-400
           h-20 
-          bg-[var(--surface-2)]/60
+          bg-[var(--surface-2)]/30
           backdrop-blur-[45px] 
           grid
           justify-center 
@@ -69,7 +67,7 @@ function Introduction({introref}){
   // },[inView])
   return (
     <FadeIn>
-      <div className=' section justify-center scroll-mt-60' ref={introref}>
+      <div className=' section justify-center scroll-mt-30' ref={introref}>
         <h1 className='txt-content text-2xl font-raleway font-thin tracking-[1px]'>Simple.<br></br></h1>
         <h1 className='txt-content text-2xl font-monsieur font-thin tracking-[1px]'>Elegant.<br></br></h1>
         <h1 className='txt-content text-2xl font-raleway font-thin tracking-[1px]'>Functional.</h1>
@@ -88,7 +86,7 @@ function AboutMe({aboutref}){
   // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-60' id='about' ref={aboutref}>
+      <div className='section scroll-mt-30' id='about' ref={aboutref}>
         <div className="myImg h-[100%] w-[100%] col-[2/5] row-[2/10] flex justify-center items-center">
           <img className='rounded-3xl' src='src/assets/images/MySelf.jpg' alt="Handsome right?" />
         </div>
@@ -137,60 +135,78 @@ function Skills({skillsref}){
   // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-60' id='skills' ref={skillsref}>
+      <div className='section scroll-mt-30' id='skills' ref={skillsref}>
         <div className="text-2xl info font-railway font-thin w-[100%] h-[100%] text-white col-[2/13] row-[2/10] flex flex-col">
           <p className=''>So as of now my key skills include:</p>
           <br/>
-          <ul className='list-disc list-inside flex flex-row gap-2 w-[100%] justify-around'>
-            <Card front={
-              <>
-                  <h2>React</h2>
-              </>
-            }
-            back={
-              <>
-                  <h2>React</h2>
-                  <p>Built multiple responsive web apps.</p>
-                  <p>Hooks • Context • Routing</p>
-              </>
-            } />
-            <Card front={
-              <>
-                  <h2>JavaScript with <br/> Html and Css</h2>
-              </>
-            }
-            back={
-              <>
-                  <h2>JavaScript with <br/> Html and Css</h2>
-                  <p>Built multiple responsive web apps.</p>
-                  <p>Hooks • Context • Routing</p>
-              </>
-            } />
-            <Card front={
-              <>
-                  <h2>Python</h2>
-              </>
-            }
-            back={
-              <>
-                  <h2>Python</h2>
-                  <p>Built multiple responsive web apps.</p>
-                  <p>Hooks • Context • Routing</p>
-              </>
-            } />
-            <Card front={
-              <>
-                  <h2>Sql</h2>
-              </>
-            }
-            back={
-              <>
-                  <h2>Sql</h2>
-                  <p>Built multiple responsive web apps.</p>
-                  <p>Hooks • Context • Routing</p>
-              </>
-            } />
-            
+          <ul className='flex flex-col gap-5 w-[100%] justify-around'>
+            <li className='flex flex-row gap-2 w-[100%] justify-around'>
+              <Card front={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl' >React</h2>
+                </>
+              }
+              back={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>React</h2>
+                  <p className='text-sm'>Build multiple responsive web apps.</p>
+                  <p className='text-sm'>Hooks • Context • Routing</p>
+                </>
+              } />
+              <Card front={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>JavaScript with <br/> Html and Css</h2>
+                </>
+              }
+              back={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>JavaScript with <br/> Html and Css</h2>
+                  <p className='text-sm'>Build multiple responsive web apps.</p>
+                  <p className='text-sm'>Interactive • Clean Design • Responsive</p>
+                </>
+              } />
+              <Card front={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>Python</h2>
+                </>
+              }
+              back={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>Python</h2>
+                  <p className='text-sm'>Build easy to understand and efficient backend.</p>
+                  <p className='text-sm'>Backend • Automation</p>
+                </>
+              } />
+              <Card front={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>Sql</h2>
+                </>
+              }
+              back={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>Sql</h2>
+                  <p className='text-sm'>Used for data management in various databases. Primarily for it's security.</p>
+                  <p className='text-sm'>Database • Data Management</p>
+                </>
+              } />
+            </li>
+            <li className='flex flex-row gap-2 w-[100%] justify-around'>
+              <Card 
+              front={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>Git & Github</h2>
+                </>
+              }
+              back={
+                <>
+                  <h2 className='font-raleway font-thin text-2xl'>Git & Github</h2>
+                  <p className='text-sm'>Used for version control and collaborating with others.</p>
+                  <p className='text-sm'>Version Control • Collaboration</p>
+                  <br/>
+                  <a className='text-sm hover:text-primary underline' target="_blank" href='https://github.com/manishkumarnarayan'>View my profile here</a>
+                </>
+              } />
+            </li>
           </ul>
           <br />
           <p>But these aren't the only ones as I'm constantly improving and learning new things.</p>
@@ -210,7 +226,7 @@ function Projects({projectsref}){
   // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-60' ref={projectsref}>
+      <div className='section scroll-mt-30' ref={projectsref}>
         <h1 className='text-2xl font-bold'>Projects</h1>
       </div>
     </FadeIn>
@@ -227,7 +243,7 @@ function Contact({contactref}){
   // },[inView])
   return (
     <FadeIn>
-      <div className='section scroll-mt-60' ref={contactref}>
+      <div className='section scroll-mt-30' ref={contactref}>
         <h1 className='text-2xl font-bold'>Contact</h1>
       </div>
     </FadeIn>

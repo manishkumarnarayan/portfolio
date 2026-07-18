@@ -53,12 +53,13 @@
   display: grid;
   grid-template-columns: repeat(13,1fr);
   grid-template-rows: repeat(10,1fr);
+  height: fit-content;
 }
 
 .card{
   background-color: var(--surface);
   position: relative;
-  height: 300px;
+  height: 400px;
   width: 250px;
   transform-style: preserve-3d;
   transition: all 1s;
@@ -76,15 +77,15 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
-  
+  padding: 20px;
   backface-visibility: hidden;
 }
-  
+
 .back{
   transform: rotateY(180deg);
 }
 
 .flipped{
-  background-color: brown;
+  background-color: rgb(18, 49, 95);
   transform: rotateY(180deg);
 }
