@@ -40,12 +40,13 @@ function Header({
           items-center 
           text-[var(--text)]
           z-45
+          px-4
           ${scrollY ? 
             'top-4 w-[96%] rounded-2xl shadow-[0_0_20px_var(--border)]' 
             : 'top-0 w-full rounded-none'
           }`
         }>
-        <h1 className='name justify-self-start p-4 col-[1/3]'>Manish Kumar Narayan</h1>
+        <h1 className='name justify-self-start col-[1/3]'>Manish Kumar Narayan</h1>
         <div className="section-btn flex flex-row justify-end gap-5 col-[4/7] overflow-x-hidden pr-[10px]">
           <button onClick={()=>scrollToSection(introref)} >Introduction</button>
           <button className='whitespace-nowrap' onClick={()=>scrollToSection(aboutref)} >About Me</button>
@@ -100,6 +101,32 @@ function AboutMe({aboutref}){
   )
 }
 
+function Card({front, back}){
+  const [flipped, setFlipped] = useState(false);
+  
+  const toggle = (id) => {
+      setFlipped(prev => ({
+          ...prev,
+          [id]: !prev[id]
+    }));
+  }
+  return (
+    <div
+      className={`card ${flipped['test'] ? "flipped" : ""}`}
+      onClick={() => toggle('test')}
+    >
+      <div className="front">
+          {front}
+          {/* <img src={reactLogo} /> */}
+      </div>
+
+      <div className="back">
+          {back}
+      </div>
+    </div>
+  )
+}
+
 
 function Skills({skillsref}){
   // const inView = useInView(ref, { amount: 0.2 });
@@ -114,17 +141,56 @@ function Skills({skillsref}){
         <div className="text-2xl info font-railway font-thin w-[100%] h-[100%] text-white col-[2/13] row-[2/10] flex flex-col">
           <p className=''>So as of now my key skills include:</p>
           <br/>
-          <ul className='list-disc list-inside flex flex-col gap-2'>
-            <li>Html</li>
-            <li>CSS</li>
-            <li>Javascript</li>
-            <li>React</li>
-            <li>Git & Github</li>
-            <li>Python</li>
-            <li>Sql</li>
-            <li>Java</li>
-            <li>Firebase</li>
-            <li>Ai agents ( like Claude, ChatGPT, Gemini, Kiwi, Deepseek, etc )</li>
+          <ul className='list-disc list-inside flex flex-row gap-2 w-[100%] justify-around'>
+            <Card front={
+              <>
+                  <h2>React</h2>
+              </>
+            }
+            back={
+              <>
+                  <h2>React</h2>
+                  <p>Built multiple responsive web apps.</p>
+                  <p>Hooks • Context • Routing</p>
+              </>
+            } />
+            <Card front={
+              <>
+                  <h2>JavaScript with <br/> Html and Css</h2>
+              </>
+            }
+            back={
+              <>
+                  <h2>JavaScript with <br/> Html and Css</h2>
+                  <p>Built multiple responsive web apps.</p>
+                  <p>Hooks • Context • Routing</p>
+              </>
+            } />
+            <Card front={
+              <>
+                  <h2>Python</h2>
+              </>
+            }
+            back={
+              <>
+                  <h2>Python</h2>
+                  <p>Built multiple responsive web apps.</p>
+                  <p>Hooks • Context • Routing</p>
+              </>
+            } />
+            <Card front={
+              <>
+                  <h2>Sql</h2>
+              </>
+            }
+            back={
+              <>
+                  <h2>Sql</h2>
+                  <p>Built multiple responsive web apps.</p>
+                  <p>Hooks • Context • Routing</p>
+              </>
+            } />
+            
           </ul>
           <br />
           <p>But these aren't the only ones as I'm constantly improving and learning new things.</p>

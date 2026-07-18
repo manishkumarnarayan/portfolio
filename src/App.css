@@ -54,3 +54,37 @@
   grid-template-columns: repeat(13,1fr);
   grid-template-rows: repeat(10,1fr);
 }
+
+.card{
+  background-color: var(--surface);
+  position: relative;
+  height: 300px;
+  width: 250px;
+  transform-style: preserve-3d;
+  transition: all 1s;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.front,
+.back{
+  position: absolute;
+  inset: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  
+  backface-visibility: hidden;
+}
+  
+.back{
+  transform: rotateY(180deg);
+}
+
+.flipped{
+  background-color: brown;
+  transform: rotateY(180deg);
+}
