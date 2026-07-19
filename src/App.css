@@ -67,6 +67,14 @@
   border-radius: 20px;
 }
 
+.card-wrapper{
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-wrapper:hover{
+  transform: scale3d(1.05,1.05,1.05);
+}
+
 .front,
 .back{
   position: absolute;
@@ -79,6 +87,10 @@
   text-align: center;
   padding: 20px;
   backface-visibility: hidden;
+}
+
+.front:hover{
+  text-decoration: underline;
 }
 
 .back{

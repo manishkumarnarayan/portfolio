@@ -99,7 +99,7 @@ function AboutMe({aboutref}){
   )
 }
 
-function Card({front, back}){
+function Card({front, back, id}){
   const [flipped, setFlipped] = useState(false);
   
   const toggle = (id) => {
@@ -109,17 +109,19 @@ function Card({front, back}){
     }));
   }
   return (
-    <div
-      className={`card ${flipped['test'] ? "flipped" : ""}`}
-      onClick={() => toggle('test')}
-    >
-      <div className="front">
-          {front}
-          {/* <img src={reactLogo} /> */}
-      </div>
+    <div className="card-wrapper">
+      <div
+        className={`card ${flipped[id] ? "flipped" : ""}`}
+        onClick={() => toggle(id)}
+      >
+        <div className="front">
+            {front}
+            {/* <img src={reactLogo} /> */}
+        </div>
 
-      <div className="back">
-          {back}
+        <div className="back">
+            {back}
+        </div>
       </div>
     </div>
   )
@@ -133,80 +135,140 @@ function Skills({skillsref}){
   //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
   //   }
   // },[inView])
+  const skills =[
+      {
+        id: 'react',
+        front:(
+            <>
+              <h2 className='font-raleway font-thin text-2xl' >React</h2>
+            </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>React</h2>
+            <p className='text-sm'>Build multiple responsive web apps.</p>
+            <p className='text-sm'>Hooks • Context • Routing</p>
+          </>
+        )
+      },
+      {
+        id: 'js',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>JavaScript with <br/> Html and Css</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>JavaScript with <br/> Html and Css</h2>
+            <p className='text-sm'>Build multiple responsive web apps.</p>
+            <p className='text-sm'>Interactive • Clean Design • Responsive</p>
+          </>
+        )
+      },
+      {
+        id: 'python',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Python</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Python</h2>
+            <p className='text-sm'>Build easy to understand and efficient backend.</p>
+            <p className='text-sm'>Backend • Automation</p>
+          </>
+        )
+      },
+      {
+        id: 'sql',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Sql</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Sql</h2>
+            <p className='text-sm'>Used for data management in various databases. Primarily for it's security.</p>
+            <p className='text-sm'>Database • Data Management</p>
+          </>
+        )
+      },
+      {
+        id:'java',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Java</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Java</h2>
+            <p className='text-sm'>Used for various purposes including backend and other applications.</p>
+            <p className='text-sm'>Object-Oriented • Backend</p>
+          </>
+        )
+      },
+      {
+        id:'git',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Git & Github</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Git & Github</h2>
+            <p className='text-sm'>Used for version control and collaborating with others.</p>
+            <p className='text-sm'>Version Control • Collaboration</p>
+            <br/>
+            <a className='text-sm hover:text-primary hover:underline' target="_blank" href='https://github.com/manishkumarnarayan'>View my profile here</a>
+          </>
+        )
+      },
+      {
+        id: 'vercel',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Vercel</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>Vercel</h2>
+            <p className='text-sm'>Used for deploying web applications.</p>
+            <p className='text-sm'>Hosting • Deployment • CI/CD</p>
+          </>
+        )
+      },
+      {
+        id:'AI-agents',
+        front:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>AI Agents</h2>
+          </>
+        ),
+        back:(
+          <>
+            <h2 className='font-raleway font-thin text-2xl'>AI Agents</h2>
+            <p className='text-sm'>Can use various AI models and tools to create AI agents that can perform various tasks.</p>
+            <p className='text-sm'>AI Agents • Claude • ChatGPT • Gemini</p>
+          </>
+        )
+      }
+  ]
   return (
     <FadeIn>
       <div className='section scroll-mt-30' id='skills' ref={skillsref}>
         <div className="text-2xl info font-railway font-thin w-[100%] h-[100%] text-white col-[2/13] row-[2/10] flex flex-col">
           <p className=''>So as of now my key skills include:</p>
           <br/>
-          <ul className='flex flex-col gap-5 w-[100%] justify-around'>
-            <li className='flex flex-row gap-2 w-[100%] justify-around'>
-              <Card front={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl' >React</h2>
-                </>
-              }
-              back={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>React</h2>
-                  <p className='text-sm'>Build multiple responsive web apps.</p>
-                  <p className='text-sm'>Hooks • Context • Routing</p>
-                </>
-              } />
-              <Card front={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>JavaScript with <br/> Html and Css</h2>
-                </>
-              }
-              back={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>JavaScript with <br/> Html and Css</h2>
-                  <p className='text-sm'>Build multiple responsive web apps.</p>
-                  <p className='text-sm'>Interactive • Clean Design • Responsive</p>
-                </>
-              } />
-              <Card front={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>Python</h2>
-                </>
-              }
-              back={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>Python</h2>
-                  <p className='text-sm'>Build easy to understand and efficient backend.</p>
-                  <p className='text-sm'>Backend • Automation</p>
-                </>
-              } />
-              <Card front={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>Sql</h2>
-                </>
-              }
-              back={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>Sql</h2>
-                  <p className='text-sm'>Used for data management in various databases. Primarily for it's security.</p>
-                  <p className='text-sm'>Database • Data Management</p>
-                </>
-              } />
-            </li>
-            <li className='flex flex-row gap-2 w-[100%] justify-around'>
-              <Card 
-              front={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>Git & Github</h2>
-                </>
-              }
-              back={
-                <>
-                  <h2 className='font-raleway font-thin text-2xl'>Git & Github</h2>
-                  <p className='text-sm'>Used for version control and collaborating with others.</p>
-                  <p className='text-sm'>Version Control • Collaboration</p>
-                  <br/>
-                  <a className='text-sm hover:text-primary underline' target="_blank" href='https://github.com/manishkumarnarayan'>View my profile here</a>
-                </>
-              } />
-            </li>
+          <ul className='grid grid-cols-4 gap-10 w-[100%] h-[100%] justify-around'>
+            {skills.map((skill)=>{
+              return(<Card id={skill.id} front={skill.front} back={skill.back}/>)
+            })}
           </ul>
           <br />
           <p>But these aren't the only ones as I'm constantly improving and learning new things.</p>
