@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
-import FadeIn from './assets/animations/animations.jsx'
-
+import {FadeIn, ProjectCard} from './assets/animations/animations.jsx'
+import { AnimatePresence } from 'motion/react';
+import { motion } from "motion/react";
 function Header({
   introref,
   aboutref,
@@ -102,21 +103,21 @@ function AboutMe({aboutref}){
 function Card({front, back, id}){
   const [flipped, setFlipped] = useState(false);
   
-  const toggle = (id) => {
-      setFlipped(prev => ({
-          ...prev,
-          [id]: !prev[id]
-    }));
-  }
+  // const toggle = (id) => {
+  //     setFlipped(prev => ({
+  //         ...prev,
+  //         [id]: !prev[id]
+  //   }));
+  // }
   return (
     <div className="card-wrapper">
       <div
-        className={`card ${flipped[id] ? "flipped" : ""}`}
-        onClick={() => toggle(id)}
+        className={`card ${flipped ? "flipped" : ""}`}
+        id={id}
+        onClick={() => setFlipped(!flipped)}
       >
         <div className="front">
             {front}
-            {/* <img src={reactLogo} /> */}
         </div>
 
         <div className="back">
@@ -224,7 +225,7 @@ function Skills({skillsref}){
             <p className='text-sm'>Used for version control and collaborating with others.</p>
             <p className='text-sm'>Version Control • Collaboration</p>
             <br/>
-            <a className='text-sm hover:text-primary hover:underline' target="_blank" href='https://github.com/manishkumarnarayan'>View my profile here</a>
+            <a className='text-sm text-slate-400 transition ease-in-out hover:text-primary  hover:underline hover:scale-[1.2]' target="_blank" href='https://github.com/manishkumarnarayan'> Visit my git profile </a>
           </>
         )
       },
@@ -278,6 +279,44 @@ function Skills({skillsref}){
   )
 }
 
+function ProjectCard({id, name, skillUsed, github, liveLink, description}){
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <motion.div
+      layout
+      onClick={()=> setOpen(!open)}
+      className="
+        project-card
+        w-full
+        rounded-3xl
+        bg-[var(--surface)]/60
+        backdrop-blur-[20px]
+        border
+        border-white
+        overflow-hidden
+        ">
+        <motion.h2 layout>{name}</motion.h2>
+        <AnimatePresence>
+          {
+            open && (
+              <motion.div
+              initial={{height: 0, opacity:0}}
+              animate={{height: 'auto', opacity: 1}}
+              exit={{height: 0, opacity: 0}}
+              transition={{duration: 0.5}}
+              className='overflow-hidden'
+              >
+                <p>{description}</p>
+              </motion.div>
+            )
+          }
+        </AnimatePresence>
+      </motion.div>
+
+    </>
+  )
+}
 
 function Projects({projectsref}){
   // const inView = useInView(ref, { amount: 0.2 });
@@ -286,10 +325,24 @@ function Projects({projectsref}){
   //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
   //   }
   // },[inView])
+  const projects = [
+    {
+      id: 'nexconversa',
+      name: 'NexConversa',
+      skillUsed: 'JS • HTML • CSS • Python',
+      github: 'github.com/manishkumarnarayan/NexConversa',
+      liveLink: '#',
+      description: 'A texting-site with user authentication and chat functionality.'
+    }
+  ]
   return (
     <FadeIn>
-      <div className='section scroll-mt-30' ref={projectsref}>
-        <h1 className='text-2xl font-bold'>Projects</h1>
+      <div className='section scroll-mt-30 flex flex-row justify-center items-start gap-10 p-[20px]' ref={projectsref}>
+        <ul className='flex flex-row w-[100%] h-[100%] gap-10'>
+          {projects.map((project)=>{
+            return(<ProjectCard id={project.id} name={project.name} skillUsed={project.skillUsed} github={project.github} liveLink={project.liveLink} description={project.description}/>)
+          })}
+        </ul>
       </div>
     </FadeIn>
   )

@@ -19,7 +19,7 @@ export default function FadeIn({ children }) {
         }
 
     const ref = useRef(null);
-    const isInView = useInView(ref, { amount: 0.3 });
+    const isInView = useInView(ref, { amount: 0.2 });
     const controls = useAnimation();
 
     useEffect(() => {
@@ -38,3 +38,4 @@ export default function FadeIn({ children }) {
         </motion.div>
     );
 }
+

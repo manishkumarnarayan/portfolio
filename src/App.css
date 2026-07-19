@@ -57,10 +57,9 @@
 }
 
 .card{
-  background-color: var(--surface);
   position: relative;
-  height: 400px;
-  width: 250px;
+  height: 100%;
+  aspect-ratio: 2/3;
   transform-style: preserve-3d;
   transition: all 1s;
   cursor: pointer;
@@ -68,12 +67,14 @@
 }
 
 .card-wrapper{
+  perspective: 1000px;
   transition: transform 0.3s ease-in-out;
 }
 
 .card-wrapper:hover{
   transform: scale3d(1.05,1.05,1.05);
 }
+
 
 .front,
 .back{
@@ -87,6 +88,15 @@
   text-align: center;
   padding: 20px;
   backface-visibility: hidden;
+  border-radius: 20px;
+}
+
+.front{
+  background: radial-gradient(circle at top, rgb(51, 88, 124) 0%, rgb(0, 0, 0) 100%);
+}
+
+.back{
+  background: radial-gradient(circle at top, rgb(18, 49, 95) 0%, rgb(0, 0, 0) 100%);
 }
 
 .front:hover{
@@ -98,6 +108,9 @@
 }
 
 .flipped{
-  background-color: rgb(18, 49, 95);
   transform: rotateY(180deg);
+}
+
+.project-card:hover{
+  background: linear-gradient(to bottom, rgb(255, 252, 252), rgb(217, 222, 224));
 }
