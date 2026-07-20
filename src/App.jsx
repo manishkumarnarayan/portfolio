@@ -280,41 +280,52 @@ function Skills({skillsref}){
 }
 
 function ProjectCard({id, name, skillUsed, github, liveLink, description}){
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState({});
+  const toggle = (id) => {
+      setOpen(prev => ({
+          ...prev,
+          [id]: !prev[id]
+    }));
+  }
   const [ishover, setIsHover] = useState(false);
   return (
     <>
       <motion.div
       layout
-      onClick={()=> setOpen(!open)}
+      onClick={()=> toggle(id)}
       onMouseEnter={()=> setIsHover(true)}
       onMouseLeave={()=> setIsHover(false)}
-      id={id}
       className={`
         project-card
-        ${open || ishover ? 'project-card-active' : ''}
-        ${open ? 'project-card-open z-10' : 'z-0'}
+        ${open[id] || ishover ? 'project-card-active' : ''}
+        ${open[id] ? 'project-card-open z-10' : 'z-0'}
         w-full
         rounded-3xl
         overflow-hidden
         flex flex-col justify-center items-center
         `}>
-        <motion.h2 layout id={id} className={`projectName w-fit text-center text-3xl transition-all`}> {name} </motion.h2>
-        <AnimatePresence>
-          {
-            (open || ishover) && (
-              <motion.div
-              initial={{height: '0', opacity:0}}
-              animate={{height: 'auto', opacity: 1}}
-              exit={{height: '0', opacity: 0}}
-              transition={{duration: 0.5}}
-              className='overflow-hidden'
-              >
-                <p>{description}</p>
-              </motion.div>
-            )
-          }
-        </AnimatePresence>
+          <div id={id} className='h-[100%] w-[100%] flex flex-col justify-center items-center'>
+            <motion.h2 layout className={`project-name w-fit text-center text-3xl transition-all`}>
+              <div id={id}>
+                {name}
+              </div>
+            </motion.h2>
+            <AnimatePresence>
+              {
+                (open || ishover) && (
+                  <motion.div
+                  initial={{height: '0', opacity:0}}
+                  animate={{height: 'auto', opacity: 1}}
+                  exit={{height: '0', opacity: 0}}
+                  transition={{duration: 0.5}}
+                  className='overflow-hidden'
+                  >
+                    <p>{description}</p>
+                  </motion.div>
+                )
+              }
+            </AnimatePresence>
+          </div>
       </motion.div>
     </>
   )
@@ -348,8 +359,9 @@ function Projects({projectsref}){
   return (
     <FadeIn>
       <div className='section scroll-mt-30 flex flex-row justify-center items-start gap-10 p-[20px]' ref={projectsref}>
+        <h1 className='text-6xl font-raleway font-thin text-white col-[2/13] row-[2/10]'>My Projects</h1>
         <div className="project-container h-[99%] w-[99%] rounded-2xl flex flex-row justify-center items-start gap-10 p-[20px] overflow-y-scroll">
-          <ul className='grid grid-flow-rows auto-rows-[20%] w-[100%] h-[100%] gap-10'>
+          <ul className='flex flex-col justify-start items-center w-[100%] h-[auto] gap-10'>
             {projects.map((project)=>{
               return(<ProjectCard id={project.id} name={project.name} skillUsed={project.skillUsed} github={project.github} liveLink={project.liveLink} description={project.description}/>)
             })}
