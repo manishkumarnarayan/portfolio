@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
-import {FadeIn, ProjectCard} from './assets/animations/animations.jsx'
+import FadeIn from './assets/animations/animations.jsx'
 import { AnimatePresence } from 'motion/react';
 import { motion } from "motion/react";
 function Header({
@@ -281,29 +281,32 @@ function Skills({skillsref}){
 
 function ProjectCard({id, name, skillUsed, github, liveLink, description}){
   const [open, setOpen] = useState(false);
+  const [ishover, setIsHover] = useState(false);
   return (
     <>
       <motion.div
       layout
       onClick={()=> setOpen(!open)}
-      className="
+      onMouseEnter={()=> setIsHover(true)}
+      onMouseLeave={()=> setIsHover(false)}
+      id={id}
+      className={`
         project-card
+        ${open || ishover ? 'project-card-active' : ''}
+        ${open ? 'project-card-open z-10' : 'z-0'}
         w-full
         rounded-3xl
-        bg-[var(--surface)]/60
-        backdrop-blur-[20px]
-        border
-        border-white
         overflow-hidden
-        ">
-        <motion.h2 layout>{name}</motion.h2>
+        flex flex-col justify-center items-center
+        `}>
+        <motion.h2 layout id={id} className={`projectName w-fit text-center text-3xl transition-all`}> {name} </motion.h2>
         <AnimatePresence>
           {
-            open && (
+            (open || ishover) && (
               <motion.div
-              initial={{height: 0, opacity:0}}
+              initial={{height: '0', opacity:0}}
               animate={{height: 'auto', opacity: 1}}
-              exit={{height: 0, opacity: 0}}
+              exit={{height: '0', opacity: 0}}
               transition={{duration: 0.5}}
               className='overflow-hidden'
               >
@@ -313,7 +316,6 @@ function ProjectCard({id, name, skillUsed, github, liveLink, description}){
           }
         </AnimatePresence>
       </motion.div>
-
     </>
   )
 }
@@ -333,16 +335,26 @@ function Projects({projectsref}){
       github: 'github.com/manishkumarnarayan/NexConversa',
       liveLink: '#',
       description: 'A texting-site with user authentication and chat functionality.'
+    },
+    {
+      id:'proposalsite',
+      name:'Heart Proposal',
+      skillUsed:'HTML • CSS • JS',
+      github: '#',
+      liveLink: '#',
+      description: 'A proposal site'
     }
   ]
   return (
     <FadeIn>
       <div className='section scroll-mt-30 flex flex-row justify-center items-start gap-10 p-[20px]' ref={projectsref}>
-        <ul className='flex flex-row w-[100%] h-[100%] gap-10'>
-          {projects.map((project)=>{
-            return(<ProjectCard id={project.id} name={project.name} skillUsed={project.skillUsed} github={project.github} liveLink={project.liveLink} description={project.description}/>)
-          })}
-        </ul>
+        <div className="project-container h-[99%] w-[99%] rounded-2xl flex flex-row justify-center items-start gap-10 p-[20px] overflow-y-scroll">
+          <ul className='grid grid-flow-rows auto-rows-[20%] w-[100%] h-[100%] gap-10'>
+            {projects.map((project)=>{
+              return(<ProjectCard id={project.id} name={project.name} skillUsed={project.skillUsed} github={project.github} liveLink={project.liveLink} description={project.description}/>)
+            })}
+          </ul>
+        </div>
       </div>
     </FadeIn>
   )

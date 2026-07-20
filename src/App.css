@@ -111,6 +111,34 @@
   transform: rotateY(180deg);
 }
 
-.project-card:hover{
+.project-card{
   background: linear-gradient(to bottom, rgb(255, 252, 252), rgb(217, 222, 224));
+  height: 100%;
+  transition: all 1s ease-in-out;
+}
+
+.project-card-active{
+  background: linear-gradient(to left, rgb(189, 113, 212), rgb(230, 132, 76));
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+  #nexconversa{
+    background: linear-gradient(to left, rgb(102, 228, 175), rgb(123, 190, 216));
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.project-card-open{
+  height: 300%;
+}
+
+.project-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
+}
+
+.project-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
