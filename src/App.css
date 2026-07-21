@@ -132,13 +132,18 @@
   height: 8em;
   transition: all 1s ease-in-out;
 }
+.project-card:hover{
+  box-shadow: 0 0 20px var(--border);
+}
 
 .project-card-active{
   #nexconversa{
     background: linear-gradient(to left, rgb(189, 113, 212), rgb(230, 132, 76));
+    transition: all 0.5s ease-in-out;
   }
   #proposalsite{
     background: linear-gradient(to right, rgb(219, 116, 76), rgb(226, 190, 136));
+    transition: all 0.5s ease-in-out;
   }
   .project-name{
     #nexconversa{
@@ -147,6 +152,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      transition: all 0.5s ease-in-out;
     }
     #proposalsite{
       background: linear-gradient(to right, rgb(0, 0, 0), rgb(230, 126, 195));
@@ -154,16 +160,16 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      transition: all 0.5s ease-in-out;
     }
   }
   cursor: pointer;
-  transition: all 1s ease-in-out;
 }
 
 
 .project-card-open{
   height: 20em;
-  transition: all 1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .project-container {
@@ -173,4 +179,10 @@
 
 .project-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
+}
+
+.contact{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 10% 1fr;
 }
