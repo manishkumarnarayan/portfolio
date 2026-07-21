@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import FadeIn from './assets/animations/animations.jsx'
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, useInView } from 'motion/react';
 import { motion } from "motion/react";
 function Header({
   introref,
@@ -19,7 +19,7 @@ function Header({
     return ()=> window.removeEventListener('scroll', handleScroll)
   },[])
   const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+    ref.current?.scrollIntoView({behavior: 'instant', block: 'start'});
   }
   return(
     <>
@@ -47,11 +47,11 @@ function Header({
         }>
         <h1 className='name justify-self-start col-[1/3]'>Manish Kumar Narayan</h1>
         <div className="section-btn flex flex-row justify-end gap-5 col-[4/7] overflow-x-hidden pr-[10px]">
-          <button onClick={()=>scrollToSection(introref)} >Introduction</button>
-          <button className='whitespace-nowrap' onClick={()=>scrollToSection(aboutref)} >About Me</button>
-          <button onClick={()=>scrollToSection(skillsref)} >Skills</button>
-          <button onClick={()=>scrollToSection(projectsref)} >Projects</button>
-          <button onClick={()=>scrollToSection(contactref)} >Contact</button>
+          <button className={`${useInView(introref, {amount: 0.4}) ? 'btn-active' : ''}`} onClick={()=>scrollToSection(introref)} >Introduction</button>
+          <button className={`${useInView(aboutref, {amount: 0.4}) ? 'btn-active' : ''}`} onClick={()=>scrollToSection(aboutref)} >About Me</button>
+          <button className={`${useInView(skillsref, {amount: 0.4}) ? 'btn-active' : ''}`} onClick={()=>scrollToSection(skillsref)} >Skills</button>
+          <button className={`${useInView(projectsref, {amount: 0.4}) ? 'btn-active' : ''}`} onClick={()=>scrollToSection(projectsref)} >Projects</button>
+          <button className={`${useInView(contactref, {amount: 0.4}) ? 'btn-active' : ''}`} onClick={()=>scrollToSection(contactref)} >Contact</button>
         </div>
       </div>
     </>
@@ -279,57 +279,125 @@ function Skills({skillsref}){
   )
 }
 
-function ProjectCard({id, name, skillUsed, github, liveLink, description}){
-  const [open, setOpen] = useState({});
-  const toggle = (id) => {
-      setOpen(prev => ({
-          ...prev,
-          [id]: !prev[id]
-    }));
-  }
-  const [ishover, setIsHover] = useState(false);
+function ProjectCard({
+  id,
+  name,
+  skillUsed,
+  github,
+  liveLink,
+  description,
+  activeCard,
+  setActiveCard
+}) {
+  const [isHover, setIsHover] = useState(false);
+
+  const open = activeCard === id;
+
+  const toggle = () => {
+    setActiveCard(open ? null : id);
+  };
+
   return (
-    <>
-      <motion.div
+    <motion.div
       layout
-      onClick={()=> toggle(id)}
-      onMouseEnter={()=> setIsHover(true)}
-      onMouseLeave={()=> setIsHover(false)}
+      onClick={toggle}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
       className={`
         project-card
-        ${open[id] || ishover ? 'project-card-active' : ''}
-        ${open[id] ? 'project-card-open z-10' : 'z-0'}
+        ${open || isHover ? "project-card-active" : ""}
+        ${open ? "project-card-open z-10" : "z-0"}
         w-full
         rounded-3xl
         overflow-hidden
         flex flex-col justify-center items-center
-        `}>
-          <div id={id} className='h-[100%] w-[100%] flex flex-col justify-center items-center'>
-            <motion.h2 layout className={`project-name w-fit text-center text-3xl transition-all`}>
-              <div id={id}>
-                {name}
-              </div>
-            </motion.h2>
-            <AnimatePresence>
-              {
-                (open || ishover) && (
-                  <motion.div
-                  initial={{height: '0', opacity:0}}
-                  animate={{height: 'auto', opacity: 1}}
-                  exit={{height: '0', opacity: 0}}
-                  transition={{duration: 0.5}}
-                  className='overflow-hidden'
+      `}
+    >
+      <motion.div
+        layout
+        id={id}
+        className="w-full h-full flex flex-col justify-center items-center"
+      >
+        <motion.h2
+          layout
+          className="project-name text-3xl text-center"
+        >
+          <span id={id}> {name} </span>
+        </motion.h2>
+
+        {/* Description */}
+        <AnimatePresence>
+          {(open || isHover) && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="overflow-hidden"
+            >
+              <p>{description}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Expanded Content */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="overflow-hidden text-center"
+            >
+              <br />
+
+              <p className="text-sm">{github}</p>
+
+              <br />
+
+              <div className="flex gap-2 flex-wrap justify-center">
+                {skillUsed.map(skill => (
+                  <span
+                    key={skill}
+                    className="px-2 py-1 rounded bg-slate-700 text-white text-xs"
                   >
-                    <p>{description}</p>
-                  </motion.div>
-                )
-              }
-            </AnimatePresence>
-          </div>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <br />
+
+              <a
+                href={github}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-slate-400 hover:text-primary hover:underline transition"
+              >
+                Github
+              </a>
+
+              <br />
+
+              <a
+                href={liveLink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm text-slate-400 hover:text-primary hover:underline transition"
+              >
+                Live Link
+              </a>
+
+              <br />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
-    </>
-  )
+    </motion.div>
+  );
 }
+
 
 function Projects({projectsref}){
   // const inView = useInView(ref, { amount: 0.2 });
@@ -338,11 +406,12 @@ function Projects({projectsref}){
   //     ref.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
   //   }
   // },[inView])
+  const [isactive, setIsactive] = useState(false)
   const projects = [
     {
       id: 'nexconversa',
       name: 'NexConversa',
-      skillUsed: 'JS • HTML • CSS • Python',
+      skillUsed: ['JS','HTML','CSS','Python'],
       github: 'github.com/manishkumarnarayan/NexConversa',
       liveLink: '#',
       description: 'A texting-site with user authentication and chat functionality.'
@@ -350,7 +419,7 @@ function Projects({projectsref}){
     {
       id:'proposalsite',
       name:'Heart Proposal',
-      skillUsed:'HTML • CSS • JS',
+      skillUsed:["HTML",'CSS','JS'],
       github: '#',
       liveLink: '#',
       description: 'A proposal site'
@@ -363,7 +432,15 @@ function Projects({projectsref}){
         <div className="project-container h-[99%] w-[99%] rounded-2xl flex flex-row justify-center items-start gap-10 p-[20px] overflow-y-scroll">
           <ul className='flex flex-col justify-start items-center w-[100%] h-[auto] gap-10'>
             {projects.map((project)=>{
-              return(<ProjectCard id={project.id} name={project.name} skillUsed={project.skillUsed} github={project.github} liveLink={project.liveLink} description={project.description}/>)
+              return(<ProjectCard key={project.id} 
+                id={project.id} 
+                name={project.name} 
+                skillUsed={project.skillUsed} 
+                github={project.github} 
+                liveLink={project.liveLink} 
+                description={project.description} 
+                activeCard={isactive} 
+                setActiveCard={setIsactive}/>)
             })}
           </ul>
         </div>

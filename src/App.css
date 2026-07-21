@@ -29,11 +29,27 @@
     border-bottom: 2px solid var(--border);
   }
   button:hover{
+    background: linear-gradient(to right, rgb(91, 235, 240), rgb(255, 255, 255));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-decoration: underline;
     text-underline-offset: 5px;
     text-decoration-thickness: 2px;
+    text-decoration-color: white;
     cursor: pointer;
   }
+}
+
+.btn-active{
+  background: linear-gradient(to right, rgb(91, 235, 240), rgb(255, 255, 255));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: white;
 }
 
 .txt-content{
@@ -113,7 +129,7 @@
 
 .project-card{
   background: linear-gradient(to bottom, rgb(255, 252, 252), rgb(217, 222, 224));
-  height: 10em;
+  height: 8em;
   transition: all 1s ease-in-out;
 }
 
@@ -146,7 +162,8 @@
 
 
 .project-card-open{
-  height: 50em;
+  height: 20em;
+  transition: all 1s ease-in-out;
 }
 
 .project-container {
