@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import FadeIn from './assets/animations/animations.jsx'
 import { AnimatePresence, useInView } from 'motion/react';
-import { motion } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import {submitContact} from './contactSubmit'
 function Header({
   introref,
@@ -69,9 +69,13 @@ function Introduction({introref}){
   // },[inView])
   return (
     <FadeIn>
-      <div className=' section justify-center scroll-mt-30' ref={introref}>
-        <h1 className='txt-content text-2xl font-raleway font-thin tracking-[1px]'>Simple.<br></br></h1>
-        <h1 className='txt-content text-2xl font-monsieur font-thin tracking-[1px]'>Elegant.<br></br></h1>
+      <div className='section justify-center scroll-mt-30 overflow-x-hidden' ref={introref}>
+        <h1 className='txt-content text-2xl font-raleway font-thin tracking-[1px]'>Simple.</h1>
+        <h1 className='flex justify-center items-center gap-7 txt-content text-2xl font-monsieur font-thin tracking-[1px]'>
+          <hr className="w-[1000px] bg-white"/>
+          <span>Elegant.</span>
+          <hr className="w-[1000px] bg-white"/>
+        </h1>
         <h1 className='txt-content text-2xl font-raleway font-thin tracking-[1px]'>Functional.</h1>
       </div>
     </FadeIn>
@@ -336,9 +340,9 @@ function ProjectCard({
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="overflow-hidden"
+              className="overflow-hidden w-[70%] flex flex-col justify-center items-center"
             >
-              <p>{description}</p>
+              <p className="text-wrap text-center">{description}</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -353,9 +357,6 @@ function ProjectCard({
               transition={{ duration: 0.4 }}
               className="overflow-hidden text-center"
             >
-              <br />
-
-              <p className="text-sm">{github}</p>
 
               <br />
 
@@ -376,7 +377,7 @@ function ProjectCard({
                 href={github}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm text-slate-400 hover:text-primary hover:underline transition"
+                className="text-sm text-grey-400 hover:text-primary hover:underline transition"
               >
                 Github
               </a>
@@ -387,7 +388,7 @@ function ProjectCard({
                 href={liveLink}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm text-slate-400 hover:text-primary hover:underline transition"
+                className="text-sm text-grey-400 hover:text-primary hover:underline transition"
               >
                 Live Link
               </a>
@@ -415,17 +416,17 @@ function Projects({projectsref}){
       id: 'nexconversa',
       name: 'NexConversa',
       skillUsed: ['JS','HTML','CSS','Python'],
-      github: 'github.com/manishkumarnarayan/NexConversa',
-      liveLink: '#',
-      description: 'A texting-site with user authentication and chat functionality.'
+      github: 'https://github.com/manishkumarnarayan/nexconversa',
+      liveLink: 'https://nexconversa.vercel.app/',
+      description: 'NexConversa is a modern real-time chat application that enables seamless one-to-one conversations with instant messaging, user authentication, and cloud-based data storage. It focuses on speed, reliability, and a clean user experience.'
     },
     {
-      id:'proposalsite',
-      name:'Heart Proposal',
+      id:'whisperlink',
+      name:'WhisperLink',
       skillUsed:["HTML",'CSS','JS'],
-      github: '#',
-      liveLink: '#',
-      description: 'A proposal site'
+      github: 'https://github.com/manishkumarnarayan/whisperlink',
+      liveLink: 'https://whisperlink-nu.vercel.app/',
+      description: 'An anonymous messaging platform that lets anyone share honest thoughts, compliments, confessions, or feedback through a personalized link.\nBuilt with privacy and simplicity in mind, it creates a safe space for authentic conversations.'
     }
   ]
   return (
@@ -452,7 +453,6 @@ function Projects({projectsref}){
   )
 }
 
-
 function Contact({contactref}){
   // const inView = useInView(ref, { amount: 0.2 });
   // useEffect(()=>{
@@ -462,6 +462,7 @@ function Contact({contactref}){
   // },[inView])
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
+  const [phone,setPhone] = useState('');
   const [subject,setSubject] = useState('');
   const [message,setMessage] = useState('');
   return (
@@ -473,6 +474,7 @@ function Contact({contactref}){
         <div className="contact-left w-full h-full flex flex-col justify-center items-center gap-2">
           <input value={name} onChange={(e)=>setName(e.target.value)} type="text" placeholder='Name' className='w-[80%] h-[50px] bg-[var(--surface)] border-[1px] border-[var(--border)] rounded-[10px] p-[10px] text-white'/>
           <input value={email} onChange={(e)=>setEmail(e.target.value)} type="text" placeholder='Email' className='w-[80%] h-[50px] bg-[var(--surface)] border-[1px] border-[var(--border)] rounded-[10px] p-[10px] text-white'/>
+          <input value={phone} onChange={(e)=>setPhone(e.target.value)} type="text" placeholder='Phone (optional)' className='w-[80%] h-[50px] bg-[var(--surface)] border-[1px] border-[var(--border)] rounded-[10px] p-[10px] text-white'/>
           <select value={subject} onChange={(e)=>setSubject(e.target.value)} name="subject" id="" className='w-[80%] h-[50px] bg-[var(--surface)] border-[1px] border-[var(--border)] rounded-[10px] p-[10px] text-white'>
             <option value="">Select a subject</option>
             <option value="job">Job offer</option>
@@ -493,7 +495,11 @@ function Contact({contactref}){
           }} className='w-[80%] h-[50px] bg-[var(--surface-2)] border-[1px] border-[var(--border)] rounded-[10px] p-[10px] text-white'>Send</button>
         </div>
         <div className="contact-right w-full h-full flex flex-col justify-center items-center gap-10">
-          <p className='text-6xl font-raleway font-thin text-white'>Or</p>
+          <p className='flex justify-center items-center gap-10 text-6xl font-raleway font-thin text-white'>
+            <hr className="w-[200px] bg-white"/>
+            <span className="">Or</span>
+            <hr className="w-[200px] bg-white"/>
+          </p>
           <div className='flex flex-row justify-center items-center gap-10'>
           <a href='mailto:manishkumarnarayan2007@gmail.com'>
             <p className='text-2xl font-raleway font-thin text-white'>
@@ -532,21 +538,37 @@ function Body() {
   const skillsref = useRef(null);
   const projectsref = useRef(null);
   const contactref = useRef(null);
+  const {scrollYProgress} = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 45,
+    restDelta: 0.001,
+  });
   return (
-    <div className='flex flex-col gap-2 items-center justify-center'>
-      <Header
-        introref={introref}
-        aboutref={aboutref}
-        skillsref={skillsref}
-        projectsref={projectsref}
-        contactref={contactref}
+    <>
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-1 bg-[rgba(45,169,251,1)] z-50 origin-left"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        exit={{ scaleX: 0 }}
+        transition={{ ease: "easeInOut" }}
       />
-      <Introduction introref={introref} />
-      <AboutMe aboutref={aboutref} />
-      <Skills skillsref={skillsref}/>
-      <Projects projectsref={projectsref}/>
-      <Contact contactref={contactref}/>
-    </div>
+      <div className='flex flex-col gap-2 items-center justify-center'>
+        <Header
+          introref={introref}
+          aboutref={aboutref}
+          skillsref={skillsref}
+          projectsref={projectsref}
+          contactref={contactref}
+        />
+        <Introduction introref={introref} />
+        <AboutMe aboutref={aboutref} />
+        <Skills skillsref={skillsref}/>
+        <Projects projectsref={projectsref}/>
+        <Contact contactref={contactref}/>
+      </div>
+    </>
   )
 }
 
