@@ -19,7 +19,7 @@ export default function FadeIn({ children }) {
         }
 
     const ref = useRef(null);
-    const isInView = useInView(ref, { amount: 0.2 });
+    const isInView = useInView(ref, { amount: 0.05 });
     const controls = useAnimation();
 
     useEffect(() => {

@@ -4,31 +4,33 @@
   @apply 
   relative 
   top-23 
-  w-[98%] 
-  h-[calc(100vh-6rem)] 
+  w-[96%] 
+  md:w-[98%] 
+  min-h-[calc(100vh-6rem)] 
+  h-auto 
+  md:h-[calc(100vh-6rem)] 
   bg-[var(--surface)]/60
-  /* backdrop-blur-[20px]  */
   flex 
   flex-col 
   justify-center
   items-center 
   rounded-3xl 
   border-[1px] 
-  border-white;
+  border-white
 }
 
-
-.header{
+.header {
   font-family: var(--font-raleway);
   font-optical-sizing: auto;
-  font-size: 2rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  button{
+  
+  button {
     font-family: var(--font-montserrat);
-    font-size: 0.5rem;
-    border-bottom: 2px solid var(--border);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
   }
-  button:hover{
+  
+  button:hover {
     background: linear-gradient(to right, rgb(91, 235, 240), rgb(255, 255, 255));
     background-clip: text;
     -webkit-background-clip: text;
@@ -41,7 +43,7 @@
   }
 }
 
-.btn-active{
+.btn-active {
   background: linear-gradient(to right, rgb(91, 235, 240), rgb(255, 255, 255));
   background-clip: text;
   -webkit-background-clip: text;
@@ -52,48 +54,85 @@
   text-decoration-color: white;
 }
 
-.txt-content{
-  font-size: 10rem;
+.txt-content {
+  font-size: clamp(2.25rem, 8vw, 8.5rem);
   text-shadow: 0 0 20px var(--border);
   justify-self: center;
   color: var(--text);
+  text-align: center;
 }
 
-#about{
-  display: grid;
-  grid-template-columns: repeat(13,1fr);
-  grid-template-rows: repeat(10,1fr);
+#about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
 }
 
-#skills{
-  display: grid;
-  grid-template-columns: repeat(13,1fr);
-  grid-template-rows: repeat(10,1fr);
-  height: fit-content;
+@media (min-width: 768px) {
+  #about {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    padding: 0;
+    gap: 0;
+  }
 }
 
-.card{
+#skills {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  #skills {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    padding: 0;
+    gap: 0;
+  }
+}
+
+.card {
   position: relative;
   height: 100%;
-  aspect-ratio: 2/3;
+  min-height: 130px;
+  width: 100%;
+  aspect-ratio: 4/5;
   transform-style: preserve-3d;
   transition: all 1s;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 16px;
 }
 
-.card-wrapper{
+@media (min-width: 640px) {
+  .card {
+    min-height: 160px;
+    aspect-ratio: 2/3;
+    border-radius: 20px;
+  }
+}
+
+.card-wrapper {
   perspective: 1000px;
   transition: transform 0.3s ease-in-out;
+  width: 100%;
 }
 
-.card-wrapper:hover{
-  transform: scale3d(1.05,1.05,1.05);
+.card-wrapper:hover {
+  transform: scale3d(1.05, 1.05, 1.05);
 }
-
 
 .front,
-.back{
+.back {
   position: absolute;
   inset: 0;
   
@@ -102,74 +141,82 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   backface-visibility: hidden;
-  border-radius: 20px;
+  border-radius: 16px;
 }
 
-.front{
+@media (min-width: 640px) {
+  .front,
+  .back {
+    padding: 15px;
+    border-radius: 20px;
+  }
+}
+
+.front {
   background: radial-gradient(circle at top, rgb(51, 88, 124) 0%, rgb(0, 0, 0) 100%);
 }
 
-.back{
+.back {
   background: radial-gradient(circle at top, rgb(18, 49, 95) 0%, rgb(0, 0, 0) 100%);
 }
 
-.front:hover{
+.front:hover {
   text-decoration: underline;
 }
 
-.back{
+.back {
   transform: rotateY(180deg);
 }
 
-.flipped{
+.flipped {
   transform: rotateY(180deg);
 }
 
-.project-card{
+.project-card {
   background: linear-gradient(to bottom, rgb(255, 252, 252), rgb(217, 222, 224));
-  height: 8em;
-  transition: all 1s ease-in-out;
+  min-height: 7em;
+  transition: all 0.5s ease-in-out;
 }
-.project-card:hover{
+
+.project-card:hover {
   box-shadow: 0 0 20px var(--border);
 }
 
-.project-card-active{
-  #nexconversa{
-    background: linear-gradient(to left, rgb(189, 113, 212), rgb(230, 132, 76));
-    transition: all 0.5s ease-in-out;
-  }
-  #whisperlink{
-    background: linear-gradient(to right, rgb(219, 116, 76), rgb(226, 190, 136));
-    transition: all 0.5s ease-in-out;
-  }
-  .project-name{
-    #nexconversa{
-      background: linear-gradient(to left, rgb(102, 228, 175), rgb(123, 190, 216));
-      background-clip: text;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: all 0.5s ease-in-out;
-    }
-    #whisperlink{
-      background: linear-gradient(to right, rgb(0, 0, 0), rgb(230, 126, 195));
-      background-clip: text;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: all 0.5s ease-in-out;
-    }
-  }
+.project-card-active {
   cursor: pointer;
 }
 
+.project-card-active#nexconversa {
+  background: linear-gradient(to left, rgb(189, 113, 212), rgb(230, 132, 76));
+  transition: all 0.5s ease-in-out;
+}
 
-.project-card-open{
-  height: 20em;
-  transition: all 0.2s ease-in-out;
+.project-card-active#whisperlink {
+  background: linear-gradient(to right, rgb(219, 116, 76), rgb(226, 190, 136));
+  transition: all 0.5s ease-in-out;
+}
+
+.project-card-active#nexconversa .project-name {
+  background: linear-gradient(to left, rgb(102, 228, 175), rgb(123, 190, 216));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.5s ease-in-out;
+}
+
+.project-card-active#whisperlink .project-name {
+  background: linear-gradient(to right, rgb(0, 0, 0), rgb(230, 126, 195));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.5s ease-in-out;
+}
+
+.project-card-open {
+  min-height: 18em;
+  transition: all 0.3s ease-in-out;
 }
 
 .project-container {
@@ -181,13 +228,22 @@
   display: none; /* Chrome, Safari and Opera */
 }
 
-.contact{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 10% 1fr;
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.description{
+@media (min-width: 768px) {
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 10% 1fr;
+    gap: 0;
+  }
+}
+
+.description {
   resize: none;
   font-family: var(--font-montserrat);
   font-size: 1em;
