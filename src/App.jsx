@@ -4,7 +4,7 @@ import FadeIn from './assets/animations/animations.jsx'
 import { AnimatePresence, useInView } from 'motion/react';
 import { motion, useScroll, useSpring } from "motion/react";
 import {submitContact} from './contactSubmit'
-import me from '../assets/images/MySelf.jpg'
+import me from './assets/images/MySelf.jpg'
 function Header({
   introref,
   aboutref,
@@ -86,7 +86,7 @@ function AboutMe({aboutref}){
     <FadeIn>
       <div className='section scroll-mt-30' id='about' ref={aboutref}>
         <div className="myImg h-[100%] w-[100%] max-w-[260px] sm:max-w-[320px] md:max-w-none md:col-[2/5] md:row-[2/10] flex justify-center items-center">
-          <img className='rounded-3xl max-h-[300px] md:max-h-none object-cover shadow-lg'src=me alt="Handsome right?" />
+          <img className='rounded-3xl max-h-[300px] md:max-h-none object-cover shadow-lg' src={me} alt="Handsome right?" />
         </div>
         <div className="info font-raleway font-thin w-[100%] h-[100%] text-white md:col-[6/13] md:row-[2/10] text-center flex flex-col justify-center items-center gap-3">
           <h1 className='text-2xl sm:text-3xl md:text-4xl font-semibold md:font-normal'>Hey there, I'm Manish</h1>
